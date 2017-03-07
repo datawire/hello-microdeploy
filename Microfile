@@ -1,0 +1,26 @@
+---
+name: hellomd
+
+deploy:
+  type: docker
+  registry: docker.io
+  image: datawire/hellomd
+  resolver:
+    type: provided
+
+update:
+  strategy: rolling
+
+network:
+  frontends:
+    - name: public
+      type: external:load-balancer
+      ports:
+        - port: 80
+          backend: api
+  backends:
+    - name: api
+      port: 5001
+      protocol: tcp
+
+
