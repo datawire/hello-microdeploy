@@ -1,0 +1,8 @@
+# --- IntelliJ IDEA ---
+.idea
+
+# --- K Desktop Environment ---
+.directory
+
+# --- Python ---
+*.pyc

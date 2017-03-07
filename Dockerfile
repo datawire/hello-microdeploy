@@ -1,8 +1,8 @@
 FROM datawire/base-ubuntu:f57de33dfe
 MAINTAINER Datawire <dev@datawire.io>
-LABEL PROJECT_REPO_URL         = "git@github.com:datawire/deployd.git" \
-      PROJECT_REPO_BROWSER_URL = "https://github.com/datawire/deployd/hack/hello" \
-      DESCRIPTION              = "Datawire Hello" \
+LABEL PROJECT_REPO_URL         = "git@github.com:datawire/hello-microdeploy.git" \
+      PROJECT_REPO_BROWSER_URL = "https://github.com/datawire/hello-microdeploy" \
+      DESCRIPTION              = "Hello MicroDeploy!" \
       VENDOR                   = "Datawire, Inc." \
       VENDOR_URL               = "https://datawire.io/"
 
@@ -45,7 +45,7 @@ RUN apt-get update && \
 
 # Set WORKDIR to /datawire which is the root of all our apps then COPY only requirements.txt to avoid screwing up Docker
 # caching and causing a full reinstall of all dependencies when dependencies are not changed.
-WORKDIR /datawire
+WORKDIR /service
 COPY requirements.txt .
 
 # Install application dependencies
@@ -53,7 +53,7 @@ RUN pip install -r requirements.txt
 
 # COPY the app code and configuration into place then perform any final configuration steps.
 COPY . ./
-RUN ln -sf /service/config/hello.conf /etc/nginx/sites-enabled/ && \
+RUN ln -sf /service/config/nginx.conf /etc/nginx/sites-enabled/ && \
     chmod +x entrypoint.sh
 
 ENTRYPOINT ["./entrypoint.sh"]

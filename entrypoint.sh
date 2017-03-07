@@ -2,4 +2,3 @@
 set -euo pipefail
 
 /usr/sbin/nginx && uwsgi --ini /service/config/uwsgi.ini
-
